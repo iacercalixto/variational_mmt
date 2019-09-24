@@ -1,8 +1,8 @@
 # this script assumes there are 2 GPU cards available in this machine (at least)
 # please edit the script accordingly in case there are less GPU cards
 
-DATA_PATH="/misc/vlgscratch4/ChoGroup/icalixto/multi30k"
-MODEL_PATH="/misc/vlgscratch4/ChoGroup/icalixto/variational-multimodal-nmt-model-snapshots"
+DATA_PATH="/path/to/data/multi30k"
+MODEL_PATH="/path/to/variational-multimodal-nmt-model-snapshots"
 MODEL_FILE_NAME="MMT_VI_Model_TranslatedM30K"
 
 
