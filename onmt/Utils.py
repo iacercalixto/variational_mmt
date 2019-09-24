@@ -1,0 +1,36 @@
+import os
+import torch
+
+# these variables must point to the directory containing multi-bleu.perl and meteor-1.5.jar, respectively
+BLEU_SCRIPT='%s/multi-bleu.perl' % "tools"
+METEOR_SCRIPT='%s/meteor-1.5.jar' % "/misc/vlgscratch4/ChoGroup/icalixto/tools/meteor-1.5"
+
+assert( os.path.isfile(BLEU_SCRIPT) ), 'ERROR: BLEU parl script not found!'
+assert( os.path.isfile(METEOR_SCRIPT) ), 'ERROR: METEOR jar not found!'
+
+# list with accepted model types
+MODEL_TYPES = ["vi-model1"]
+
+def aeq(*args):
+    """
+    Assert all arguments have the same value
+    """
+    arguments = (arg for arg in args)
+    first = next(arguments)
+    assert all(arg == first for arg in arguments), \
+        "Not all arguments have the same value: " + str(args)
+
+def sequence_mask(lengths, max_len=None):
+    """
+    Creates a boolean mask from sequence lengths.
+    """
+    batch_size = lengths.numel()
+    max_len = max_len or lengths.max()
+    return (torch.arange(0, max_len)
+            .type_as(lengths)
+            .repeat(batch_size, 1)
+            .lt(lengths.unsqueeze(1)))
+
+def use_gpu(opt):
+    return (hasattr(opt, 'gpuid') and len(opt.gpuid) > 0) or \
+        (hasattr(opt, 'gpu') and opt.gpu > -1)

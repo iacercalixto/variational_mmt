@@ -1,0 +1,8 @@
+torch==0.3.1
+tables
+torchvision==0.2.0
+pretrainedmodels
+six
+tqdm
+torchtext==0.2.3
+future
