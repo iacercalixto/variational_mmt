@@ -60,7 +60,7 @@ Z_COND_SIZE=500
 
 # pretrain the model on the concatenation of the translated Multi30k (~29K src/tgt/img instances)
 # and the back-translated comparable Multi30k (additional ~145K src/tgt/img instances)
-PRETRAIN_DATASET=${DATA_PATH}/concat-multi30k-translational-5times-comparable-1time-shuffled
+PRETRAIN_DATASET=${DATA_PATH}/concat-multi30k-translational-5times-comparable-1time-shuffled_correct
 
 # fine-tune the pre-trained models on the translated Multi30k only
 FINETUNE_DATASET=${DATA_PATH}/m30k
