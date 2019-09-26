@@ -31,8 +31,8 @@ TEST_2017_MSCOCO_SRC="${DATA_PATH}/test_2017_mscoco.lc.norm.tok.bpe-en-de-30000.
 TEST_2017_MSCOCO_TGT="${DATA_PATH}/test_2017_mscoco.lc.norm.tok.bpe-en-de-30000.de"
 TEST_2017_MSCOCO_IMGS="${DATA_PATH}/flickr30k_test_2017_mscoco_resnet50_cnn_features.hdf5"
 
-#EPOCHS=30
-EPOCHS=1
+EPOCHS=30
+#EPOCHS=1
 
 ##########
 # train

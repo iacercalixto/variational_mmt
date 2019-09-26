@@ -19,18 +19,21 @@ Before you start, please ensure that:
 
 If you want to use the exact version of the Multi30k data set used in the paper:
 
-- download image features for the Translated Multi30k data set:
-    - [`flickr30k_train_resnet50_cnn_features.hdf5`](ADD LINK): training set, 29K examples.
-    - [`flickr30k_valid_resnet50_cnn_features.hdf5`](ADD LINK): validation set, 1,014 examples.
-    - [`flickr30k_test_resnet50_cnn_features.hdf5`](ADD LINK): 2016 test set, 1K examples.
-    - [`flickr30k_test_2017_flickr_resnet50_cnn_features.hdf5`](ADD LINK): 2017 test set, 1K examples.
-    - [`flickr30k_test_2017_mscoco_resnet50_cnn_features.hdf5`](ADD LINK): ambiguous MSCOCO test set, 461 examples.
-- download additional image features for the Translated+Backtranslated Comparable Multi30k data set:
-    - [`flickr30k_train_translated-5x-comparable-1x_resnet50_cnn_features.shuffled.hdf5`](ADD LINK): this file contains features for 290,000 images, i.e. 29K translated Multi30k images five times each (145K) and 29K comparable Multi30k images also five times each (145K). We upsample images for the translated Multi30k to keep them about half of the images used when training the model in this setting.
-- ensure that variable names are correct in the corresponding `run_translated_m30k_only.sh` and `run_additional_data.sh` files. Image features were extracted as described in the paper, i.e. using a pretrained ResNet-50.
-- use the PyTorch binaries under
-`./data/m30k.*.pt` (translated Multi30k) or
-`./data/concat-multi30k-translational-5times-comparable-1time-shuffled.*.pt` (back-translated comparable + translated Multi30k).
+- download a tarball containing all files (PyTorch binaries and image features) for the translated Multi30k data set experiments [here](https://surfdrive.surf.nl/files/index.php/s/VmqtrhTipDv2djx). The tarball includes:
+    - `flickr30k_train_resnet50_cnn_features.hdf5`: training set image features, 29K examples.
+    - `flickr30k_valid_resnet50_cnn_features.hdf5`: validation set image features, 1,014 examples.
+    - `flickr30k_test_resnet50_cnn_features.hdf5`: 2016 test set image features, 1K examples.
+    - `flickr30k_test_2017_flickr_resnet50_cnn_features.hdf5`: 2017 test set image features, 1K examples.
+    - `flickr30k_test_2017_mscoco_resnet50_cnn_features.hdf5`: ambiguous MSCOCO test set image features, 461 examples.
+    - `m30k.{train,valid}.1.pt`, `m30k.vocab.pt`: PyTorch binaries containing sentences in training/validation sets and vocabulary.
+    - `{train,val,test_2016_flickr,test_2017_flickr,test_2017_mscoco}.lc.norm.tok.bpe-en-de-30000.{en,de}`: text files containing train/validation/test sets.
+- download a tarball containing all files (PyTorch binaries and image features) for the backtranslated comparable + translated Multi30k data set experiments [here](https://surfdrive.surf.nl/files/index.php/s/opHKSCmeJsGtL9Q). The tarball includes:
+    - `flickr30k_train_translated-5x-comparable-1x_resnet50_cnn_features.shuffled.hdf5`: this file contains features for 290,000 images, i.e. 29K translated Multi30k images five times each (145K) and 29K comparable Multi30k images also five times each (145K). We upsample images for the translated Multi30k to keep them about half of the images used when training the model in this setting.
+    - `concat-multi30k-translational-5times-comparable-1time-shuffled_correct.{train,valid}.1.pt`, `concat-multi30k-translational-5times-comparable-1time-shuffled_correct.vocab.pt`: PyTorch binaries containing sentences in training/validation sets and vocabulary.
+- ensure that variable names are correct in the corresponding `run_translated_m30k_only.sh` and `run_additional_data.sh` files. Image features were extracted as described in the paper, i.e. using a pretrained ResNet-50 convolutional neural network.
+
+To train a model using only the translated Multi30k, you will use the shell script `run_translated_m30k.sh`; to train a model using the back-translated comparable + translated Multi30k, you will use `run_additional_data.sh`. However, before you run these scripts:
+- change `DATA_PATH` and `MODEL_PATH` variables (in both `run_translated_m30k.sh` and  `run_additional_data.sh`), pointing them to the directory where to find the training data (decompressed from the tarball abovementioned) and to the directory where you wish to store model checkpoints, respectively.
 
 ## Training
 
